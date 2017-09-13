@@ -4,83 +4,68 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
+    public enum ObjctJanle { Object, Button };
+    public ObjctJanle Janle;//オブジェクトジャンル設定変数
 
+    //プレイヤーオブジェクト用ステータス
+    //上下端
     public float TopLimmite;
     public float UnderLimmite;
 
-    float RedRotePos = 2 / 3;
-    float BlueRotePos = 1 / 3;
+    //ガソリン
+    public static float Gasoline;//現在ガソリン量
+    public static float UseGasoline;//ガソリン消費量
+    public static float MaxGasoline;//ガソリン最大値
 
-    const string Red   = "Red";
-    const string Blue  = "Blue";
-    const string Green = "Green";
+    //移動ボタン用ステータス
+    public int ColorNum;//色番号
 
-    Vector3 RedRote   = new Vector3(-8, 6, 0);
-    Vector3 BlueRote  = new Vector3(-8, 1, 0);
-    Vector3 GreenRote = new Vector3(-8, -4, 0);
+    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8,6,0), new Vector3(-8,1,0), new Vector3(-8,-4,0) };
 
-    GameRoot GR;
+    private static Transform PlayerTransform;
 
-	void Start () {
-        GR = GameObject.Find("GameRoots").GetComponent<GameRoot>();
-        transform.position = BlueRote;
+    public static void AddGasoline(float HowMenyGasoline){
+        //ガソリン補充
+        Gasoline += HowMenyGasoline;
+        //ガソリンは一定量までしか入らない
+        if (Gasoline > MaxGasoline){
+            Gasoline = MaxGasoline;
+        }
+    }//ガソリン補充メソッド
+
+	void Awake () {
+        PlayerTransform = GameObject.FindWithTag("Player").transform;
+
+        //プレイヤーオブジェクトは初期位置へ移動
+        if (Janle == ObjctJanle.Object){
+            PlayerTransform.position = MovePos[1];//初期位置：真ん中
+        }
+
     }
 	
 	void Update () {
-        if(GameManager.Get_GameFlag() == false){
-            MoveToBlue();
-        }
+        if(Janle == ObjctJanle.Object){
+            Vector3 NowPos = PlayerTransform.position;
 
-        Vector3 NowPos = transform.position;
+            Gasoline -= UseGasoline * Time.deltaTime;//ガソリンを消費する
+            //ガソリンがなくなると車は動かない
+            if (Gasoline <= 0){
+                GameManager.Set_GameFlag(false);
+            }
 
-        //緑から落ちると上に行く
-        if (NowPos.y <= UnderLimmite){
-            NowPos.y = TopLimmite;
-            transform.position = NowPos;
-        }
+            //下に落ちると上に行く
+            if (NowPos.y <= UnderLimmite){
+                NowPos.y = TopLimmite;
+                PlayerTransform.position = NowPos;
+            }
 
-        ////移動（矢印キー）
-        //if (Input.GetKeyDown(KeyCode.UpArrow)){
-        //    if(GR.NowColor == Red){
-        //        return;
-        //    }
-        //    transform.position = RedRote;
-        //}
-        //if (Input.GetKeyDown(KeyCode.RightArrow)){
-        //    if(GR.NowColor == Blue){
-        //        return;
-        //    }
-        //    transform.position = BlueRote;
-        //}
-        //if (Input.GetKeyDown(KeyCode.DownArrow)){
-        //    if(GR.NowColor == Green){
-        //        return;
-        //    }
-        //    transform.position = GreenRote;
-        //}
-    }
-    public void MoveToRed(){
-        //赤へ移動
-        if (GR.NowColor == Red){
-            return;
         }
-        transform.position = RedRote;
     }
 
-    public void MoveToBlue(){
-        //青へ移動
-        if (GR.NowColor == Blue){
-            return;
+    public void MoveHere(){
+        if(ColorNum != CameraController.NowColorNum){
+            PlayerTransform.position = MovePos[ColorNum];
         }
-        transform.position = BlueRote;
-    }
-
-    public void MoveToGreen(){
-        //緑へ移動
-        if (GR.NowColor == Green){
-            return;
-        }
-        transform.position = GreenRote;
     }
 
     void OnGUI(){

@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,6 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -41,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 9
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -53,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 4
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -66,13 +67,27 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_RuntimeCPUUsage: 25
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -89,6 +104,8 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &119035456
@@ -100,15 +117,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.69
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.0843205
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.36722422
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -401,6 +418,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7addd1c35da6e3a449d132601a25cde5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &357239701 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1567395697658580, guid: 7addd1c35da6e3a449d132601a25cde5,
+    type: 2}
+  m_PrefabInternal: {fileID: 357239700}
 --- !u!1001 &451818263
 Prefab:
   m_ObjectHideFlags: 0
@@ -410,15 +432,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.49
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.6827874
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.5618825
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548342788736280, guid: 81458a27d90b012458b0472613493aa9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -466,7 +488,7 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 629105170}
   m_Enabled: 1
-  serializedVersion: 7
+  serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
@@ -491,6 +513,8 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &629105172
@@ -517,6 +541,7 @@ GameObject:
   - component: {fileID: 689348373}
   - component: {fileID: 689348372}
   - component: {fileID: 689348371}
+  - component: {fileID: 689348374}
   m_Layer: 5
   m_Name: RedAttackButton
   m_TagString: Red
@@ -582,8 +607,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697636635}
-        m_MethodName: HaveRed
+      - m_Target: {fileID: 689348374}
+        m_MethodName: SetAttackColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -628,6 +653,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 689348369}
+--- !u!114 &689348374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 689348369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087ec10b6212002489b5a90828812dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Janle: 1
+  SetACN: 0
 --- !u!1 &714909574
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +677,7 @@ GameObject:
   - component: {fileID: 714909578}
   - component: {fileID: 714909577}
   - component: {fileID: 714909576}
+  - component: {fileID: 714909579}
   m_Layer: 5
   m_Name: BlueButton
   m_TagString: Blue
@@ -704,8 +743,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 993597298}
-        m_MethodName: MoveToBlue
+      - m_Target: {fileID: 714909579}
+        m_MethodName: MoveHere
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -750,6 +789,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 714909574}
+--- !u!114 &714909579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 714909574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4600f9c3a8773468bfa2fb89227795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Janle: 1
+  TopLimmite: 0
+  UnderLimmite: 0
+  ColorNum: 1
 --- !u!1 &721223660
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +816,7 @@ GameObject:
   - component: {fileID: 721223663}
   - component: {fileID: 721223662}
   - component: {fileID: 721223661}
+  - component: {fileID: 721223666}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -799,7 +854,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -820,6 +875,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -837,6 +894,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721223666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 721223660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd6a2951791a204bb30142293d71471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interface_UseColor:
+  - {r: 0.89705884, g: 0.41554934, b: 0.41554934, a: 1}
+  - {r: 0.17955235, g: 0.45449907, b: 0.9044118, a: 1}
+  - {r: 0.30870432, g: 0.9632353, b: 0.25497407, a: 1}
+  Interface_FlashCount: 9
+  Interface_FlashTime: 0.5
 --- !u!1 &806030840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,6 +1194,7 @@ GameObject:
   - component: {fileID: 827585787}
   - component: {fileID: 827585786}
   - component: {fileID: 827585785}
+  - component: {fileID: 827585788}
   m_Layer: 5
   m_Name: RedButton
   m_TagString: Red
@@ -1185,8 +1260,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 993597298}
-        m_MethodName: MoveToRed
+      - m_Target: {fileID: 827585788}
+        m_MethodName: MoveHere
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1231,6 +1306,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 827585783}
+--- !u!114 &827585788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 827585783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4600f9c3a8773468bfa2fb89227795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Janle: 1
+  TopLimmite: 0
+  UnderLimmite: 0
+  ColorNum: 0
 --- !u!1 &976123761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1447,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!65 &993597295
 BoxCollider:
@@ -1401,8 +1492,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4600f9c3a8773468bfa2fb89227795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Janle: 0
   TopLimmite: 9
   UnderLimmite: -6.5
+  ColorNum: 0
 --- !u!54 &993597299
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1577,6 +1670,7 @@ GameObject:
   - component: {fileID: 1054261952}
   - component: {fileID: 1054261951}
   - component: {fileID: 1054261950}
+  - component: {fileID: 1054261953}
   m_Layer: 5
   m_Name: BlueAttackButton
   m_TagString: Blue
@@ -1642,8 +1736,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697636635}
-        m_MethodName: HaveBlue
+      - m_Target: {fileID: 1054261953}
+        m_MethodName: SetAttackColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1688,6 +1782,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1054261948}
+--- !u!114 &1054261953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1054261948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087ec10b6212002489b5a90828812dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Janle: 1
+  SetACN: 1
 --- !u!1 &1171913596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1171913597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1835,7 +1942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1189161565
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2213,7 +2320,7 @@ Canvas:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1329331884}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -2222,6 +2329,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2369,6 +2477,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a0bd2e75fada574b8654325d17d5fbb, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1384220981 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1241605066655848, guid: 7a0bd2e75fada574b8654325d17d5fbb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1384220980}
 --- !u!1 &1586128705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,6 +2493,7 @@ GameObject:
   - component: {fileID: 1586128709}
   - component: {fileID: 1586128708}
   - component: {fileID: 1586128707}
+  - component: {fileID: 1586128710}
   m_Layer: 5
   m_Name: GreenButton
   m_TagString: Green
@@ -2445,8 +2559,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 993597298}
-        m_MethodName: MoveToGreen
+      - m_Target: {fileID: 1586128710}
+        m_MethodName: MoveHere
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2491,6 +2605,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1586128705}
+--- !u!114 &1586128710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1586128705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4600f9c3a8773468bfa2fb89227795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Janle: 1
+  TopLimmite: 0
+  UnderLimmite: 0
+  ColorNum: 2
 --- !u!1 &1587925622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2742,8 +2871,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8811de7123036d44e8b97bed92da86af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstanceInterval: 1
-  PerCent: 3
+  InstanceInterval:
+  - 1
+  - 2
+  - 3
+  SetInstanceInterval: 0
+  Item:
+  - {fileID: 1073788425869842, guid: c2d2e2b18db83f541b0977fd9945da1d, type: 2}
+  - {fileID: 1111178242430654, guid: 320e0ff8295ea7c43b6b62a61631ebb1, type: 2}
 --- !u!4 &1697636633
 Transform:
   m_ObjectHideFlags: 0
@@ -2768,12 +2903,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c17f596aefc90c478311cfff0434d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChangeInterval: 10
-  NowColor: 
-  TitleButton: {fileID: 1171913596}
-  TitleText: {fileID: 1189161564}
-  ResultButton: {fileID: 821971211}
-  ResultText: {fileID: 2055575131}
+  ChangeTimer: 0
+  ChangeInterval: 8
+  Interface_Rote:
+  - {fileID: 2128016546}
+  - {fileID: 357239701}
+  - {fileID: 1384220981}
 --- !u!114 &1697636635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2785,10 +2920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087ec10b6212002489b5a90828812dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackColor: 
-  RedAttackButton: {fileID: 0}
-  BlueAttackButton: {fileID: 0}
-  GreenAttackButton: {fileID: 0}
+  Janle: 0
+  SetACN: 0
 --- !u!1 &1833086458
 GameObject:
   m_ObjectHideFlags: 0
@@ -3096,6 +3229,7 @@ GameObject:
   - component: {fileID: 2106805851}
   - component: {fileID: 2106805850}
   - component: {fileID: 2106805849}
+  - component: {fileID: 2106805852}
   m_Layer: 5
   m_Name: GreenAttackButton
   m_TagString: Green
@@ -3161,8 +3295,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697636635}
-        m_MethodName: HaveGreen
+      - m_Target: {fileID: 2106805852}
+        m_MethodName: SetAttackColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3207,6 +3341,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2106805847}
+--- !u!114 &2106805852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106805847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087ec10b6212002489b5a90828812dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Janle: 1
+  SetACN: 2
 --- !u!1 &2115005805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,3 +3470,8 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c004b1a1081410d46b3a896e0d7fe2ca, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2128016546 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1716512511890776, guid: c004b1a1081410d46b3a896e0d7fe2ca,
+    type: 2}
+  m_PrefabInternal: {fileID: 2128016545}

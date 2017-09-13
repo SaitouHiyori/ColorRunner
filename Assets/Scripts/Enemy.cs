@@ -4,91 +4,46 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public float Speed;
+    public Color[] BodyColor;
+    public int ColorNum;
 
-    const string Red     = "Red";
-    const string Blue    = "Blue";
-    const string Green   = "Green";
-    const string Yellow  = "Yellow";
-    const string Magenta = "Magenta";
-    const string Cyan    = "Cyan";
+    public float Speed;//移動速度
+    public float LeftLimitte;
 
-    string ColorName;
+    public void ColorChanger(int NextColorNum){
+        ColorNum = NextColorNum;
 
-    GameRoot GR;
+        //ColorNumの値で色が変化
+        GetComponent<Renderer>().material.color = BodyColor[ColorNum];
+        //GetComponent<Material>().color = BodyColor[ColorNum];
 
-    void Start () {
-        GR = GameObject.Find("GameRoots").GetComponent<GameRoot>();
-        while (true){
-            int Index = Random.Range(0, 7);
-            switch (Index){
-                case 0:
-                    ColorName = Red;
-                    if (GR.NowColor == ColorName){
-                        continue;
-                    }
-                    GetComponent<Renderer>().material.color = Color.red;
-                    break;
-                case 1:
-                    ColorName = Blue;
-                    if (GR.NowColor == ColorName){
-                        continue;
-                    }
-                    GetComponent<Renderer>().material.color = Color.blue;
-                    break;
-                case 2:
-                    ColorName = Green;
-                    if (GR.NowColor == ColorName){
-                        continue;
-                    }
-                    GetComponent<Renderer>().material.color = Color.green;
-                    break;
-                case 3:
-                    GetComponent<Renderer>().material.color = Color.yellow;
-                    break;
-                case 4:
-                    GetComponent<Renderer>().material.color = Color.magenta;
-                    break;
-                case 5:
-                    GetComponent<Renderer>().material.color = Color.cyan;
-                    break;
-                default:
-                    GetComponent<Renderer>().material.color = Color.gray;
-                    break;
-            }
-            break;
+        //背景と同化したら消滅
+        if (CameraController.NowColorNum == ColorNum){
+            Destroy(this.gameObject);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-        //背景色と同化で消滅
-        if(GR.NowColor == ColorName){
-            Destroy(this.gameObject);
-        }
 
+    private void Awake () {
+        //ランダムに色を決定
+        ColorChanger(Random.Range(3, BodyColor.Length));
+    }
+
+    private void Update () {
         //画面外退場で消滅
-        if(this.transform.position.x < -15){
+        if(this.transform.position.x < LeftLimitte){
             Destroy(this.gameObject);
         }
 
-        //ゲームオーバーで消滅
-        if (GameManager.Get_GameFlag() == false){
-            Destroy(this.gameObject);
-        }
-
+        //移動
         Vector3 Move = new Vector3(-Speed, 0, 0);
-
         transform.position += Move;
 	}
 
-    void OnTriggerEnter(Collider other){
+    private void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
+            //Playerに触れたらゲーム終了
             Destroy(this.gameObject);
-            GameManager.GameEnd();
-            GameManager.Reset_GameScore();
-            GR.ResultButton.SetActive(true);
-            GR.ResultText.SetActive(true);
+            GameManager.Set_GameFlag(false);
         }
     }
 }

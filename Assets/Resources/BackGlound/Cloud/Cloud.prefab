@@ -145,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812539318651304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.72, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4378817796491568}
@@ -198,6 +198,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23169520066865198
 MeshRenderer:
@@ -229,6 +230,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23263752181457192
 MeshRenderer:
@@ -260,6 +262,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23918588153182352
 MeshRenderer:
@@ -291,6 +294,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33301447375748294
 MeshFilter:
@@ -379,8 +383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f862fbd2e01769a449fd737a6752d5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
-  HeighEnd: 5
+  Speed: 5
+  HeighEnd: 7
   LowEnd: -5
-  ScrollStart: 15
-  ScrollEnd: -15
+  ScrollStart: 14
+  ScrollEnd: -14

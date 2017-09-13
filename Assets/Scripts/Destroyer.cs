@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour {
 
+    //敵を倒して入手できるスコア
     public int Score;
 
     GameRoot GR;
     Attack AT;
 
-	void Start () {
-        GR = GameObject.Find("GameRoots").GetComponent<GameRoot>();
-        AT = GameObject.Find("GameRoots").GetComponent<Attack>();
-
+	void Awake () {
         Destroy(this.gameObject, Time.deltaTime);
 	}
 
     void OnTriggerEnter(Collider other){
-        if(other.gameObject.tag == "Enemy" && AT.AttackColor == GR.NowColor){
-            Destroy(other.gameObject);
-            GameManager.Add_GameScore(Score);
+        if (other.gameObject.tag == "Enemy"){
+            //接触したEnemyを攻撃色に変更する
+            other.GetComponent<Enemy>().ColorChanger(Attack.AttackColorNum);
         }
     }
 }
