@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent (typeof(AudioSource))]
+
 public class Player : MonoBehaviour {
     //上下端
     public float TopLimmite;
@@ -21,6 +23,10 @@ public class Player : MonoBehaviour {
     //移動位置
     private Vector3[] MovePos = new Vector3[3] { new Vector3(-8,6,0), new Vector3(-8,1,0), new Vector3(-8,-4,0) };
     private static Transform PlayerTransform;
+
+    //Audio
+    private AudioSource AudioSource;
+    public AudioClip SoundEfect;
 
     //ボタンアクション
     public void RoteChange(Paint.Name RoteColor){
@@ -52,6 +58,7 @@ public class Player : MonoBehaviour {
 
 	void Awake () {
         PlayerTransform = GameObject.FindWithTag("Player").transform;
+        AudioSource = GetComponent<AudioSource>();
 
         //プレイヤーオブジェクトは初期位置へ移動
         PlayerTransform.position = MovePos[1];//初期位置：真ん中
