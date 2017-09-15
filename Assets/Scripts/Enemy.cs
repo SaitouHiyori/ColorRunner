@@ -3,29 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-
-    public Color[] BodyColor;
-    public int ColorNum;
+    //本体色
+    private int BodyColorCount;//使用する本体色数
+    public Paint.Name NowColor;//現在の本体色
 
     public float Speed;//移動速度
-    public float LeftLimitte;
+    public float LeftLimitte;//消失点
 
-    public void ColorChanger(int NextColorNum){
-        ColorNum = NextColorNum;
-
-        //ColorNumの値で色が変化
-        GetComponent<Renderer>().material.color = BodyColor[ColorNum];
-        //GetComponent<Material>().color = BodyColor[ColorNum];
+    public void ColorChanger(Paint.Name NewColor){
+        //色変更
+        NowColor = NewColor;
+        GetComponent<Renderer>().material.color = Paint.GetColor(NowColor);
 
         //背景と同化したら消滅
-        if (CameraController.NowColorNum == ColorNum){
+        if (CameraController.NowBackgroundColor == NowColor){
             Destroy(this.gameObject);
         }
-    }
+    }//本体色変更メソッド
 
     private void Awake () {
+        //本体色数取得
+        BodyColorCount = System.Enum.GetNames(typeof(Paint.Name)).Length;
+
         //ランダムに色を決定
-        ColorChanger(Random.Range(3, BodyColor.Length));
+        int FirstColor = Random.Range(0, BodyColorCount);
+        ColorChanger(Paint.Int2Name(FirstColor));
     }
 
     private void Update () {
@@ -43,7 +45,7 @@ public class Enemy : MonoBehaviour {
         if(other.gameObject.tag == "Player"){
             //Playerに触れたらゲーム終了
             Destroy(this.gameObject);
-            GameManager.Set_GameFlag(false);
+            GameManager.Flag = false;
         }
     }
 }

@@ -10,29 +10,41 @@ public static class GameManager{
 
     private static bool GameFlag;
 
-    public static void Add_GameScore(int Score){
-        GameScore += Score;
+    public static int Score{
+        set{
+            GameScore += value;
+        }
+        get{
+            return GameScore;
+        }
     }
-    public static int Get_GameScore(){
-        return GameScore;
-    }
+
     public static void Reset_GameScore(){
         GameScore = 0;
     }
 
-    public static void Add_GameTimer(float Time){
-        GameTimer += Time;
-    }
-    public static float Get_GameTimer(){
-        return GameTimer;
+    public static float Timer{
+        set{
+            GameTimer += value;
+        }
+        get{
+            return GameTimer;
+        }
     }
 
-    public static void Set_GameFlag(bool Flag){
-        GameFlag = Flag;
+    public static void TimerReset(){
+        GameTimer = 0;
     }
-    public static bool Get_GameFlag(){
-        return GameFlag;
+
+    public static bool Flag{
+        set{
+            GameFlag = value;
+        }
+        get{
+            return GameFlag;
+        }
     }
+
     public static void GameStart(){
         GameFlag = true;
     }

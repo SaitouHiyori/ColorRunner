@@ -4,74 +4,96 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    public static Color[] UseColor = new Color[3];//背景色一覧　配列番号で管理する
-    public static int NowColorNum;//現在の背景色
+    //背景色
+    private Paint.Name[] BackgroundColor = new Paint.Name[3];//一覧
+    public static Paint.Name NowBackgroundColor;//現在の背景色
+    //public Paint.Name StartBackgroundColor;
 
-    public static int FlashCount;//点滅回数　奇数回が望ましい
-    public static float FlashTime;//点滅時間
+    public float[] FadeTime;//フェードアウト・インにかかる時間
+    public int[] FadeCount;//フェード秒数毎の往復回数
 
     public bool IsFlash;//点滅中判定フラグ
 
-    private static Camera Camera;
+    private Camera Camera;
 
-    //外部設定用変数
-    public Color[] Interface_UseColor = new Color[3];
-    public int Interface_FlashCount;
-    public float Interface_FlashTime;
-
-    private IEnumerator Flashing(int NowNum, int NewNum){
-        IsFlash = true;//点滅開始
-
+    private IEnumerator Flashing(Paint.Name NowColorName, Paint.Name NewColorName){
         //切り替える２色を取得
-        Color NowColor = UseColor[NowNum];
-        Color NewColor = UseColor[NewNum];
+        Color NowColor = Paint.GetColor(NowColorName);
+        Color NewColor = Paint.GetColor(NewColorName);
 
-        //点滅
-        int Swicher = 0;//点滅切替用変数
-        for (int i = 0; i < FlashCount; i++){
-            if (i > 0){
-                yield return new WaitForSeconds(FlashTime);//１回目は待たない
+        //変化中の色を保存
+        Color ChangeColor = new Color();
+
+        float FadeTimer = new float();//フェード中経過時間
+        float MoveN = FadeTimer / FadeTime[0];//変化の割合
+
+        for (int i = 0; i < FadeCount.Length; i++){
+            for (int j = 0; j < FadeCount[i]; j++){
+                while (MoveN < 1){//Now2New
+                    ChangeColor = NowColor * (1 - MoveN) + NewColor * MoveN;
+                    Camera.backgroundColor = ChangeColor;
+                    FadeTimer += Time.deltaTime;
+                    MoveN = FadeTimer / FadeTime[i];
+                    yield return new WaitForSeconds(Time.deltaTime);
+                }
+                while (MoveN > 0){//New2Now
+                    ChangeColor = NowColor * (1 - MoveN) + NewColor * MoveN;
+                    Camera.backgroundColor = ChangeColor;
+                    FadeTimer -= Time.deltaTime;
+                    MoveN = FadeTimer / FadeTime[i];
+                    yield return new WaitForSeconds(Time.deltaTime);
+                }
             }
-            //色切替
-            Camera.backgroundColor = (Swicher == 0) ? NewColor : NowColor;
-            Swicher = (Swicher == 0) ? 1 : 0;
-
         }
-        NowColorNum = NewNum;
-        GameRoot.RoteBehind();
-        IsFlash = false;//点滅終了
+        while (MoveN < 1){//Now2New
+            ChangeColor = NowColor * (1 - MoveN) + NewColor * MoveN;
+            Camera.backgroundColor = ChangeColor;
+            FadeTimer += Time.deltaTime;
+            MoveN = FadeTimer / FadeTime[FadeTime.Length - 1];//配列最後尾のデータを参照
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
 
     }//点滅メソッド
 
-    private IEnumerator Flash(int NowNum, int NewNum){
+    private IEnumerator Flash(Paint.Name NowColor, Paint.Name NewColor){
+        //点滅開始
         IsFlash = true;
-        yield return StartCoroutine(Flashing(NowNum, NewNum));
-        IsFlash = false;
+
+        //点滅メソッド呼出
+        yield return StartCoroutine(Flashing(NowColor, NewColor));
+
+        NowBackgroundColor = NewColor;//新しい背景色を登録
+        GameRoot.RoteBehind();//道を出現・消滅させる
+        IsFlash = false;//点滅終了
     }
 
     public  void ColorChanger(){
-        //現在の背景色と異なる色を選択する
-        int NewColorNum;
+        Paint.Name NewColor;//変更先の色
+
+        //変更先の色を決定
         while (true){
-            NewColorNum = Random.Range(0, UseColor.Length);
-            if (NewColorNum != NowColorNum) {
+            NewColor = BackgroundColor[Random.Range(0, BackgroundColor.Length)];//背景色一覧からランダムに決定
+            if (NewColor != NowBackgroundColor) {
                 break;
-            }
+            }//現在の背景色と異なる色を選択する
         }
-        StartCoroutine(Flash(NowColorNum, NewColorNum));
-    }//色変更メソッド
+
+        //点滅メソッド呼出
+        StartCoroutine(Flash(NowBackgroundColor, NewColor));
+    }//背景色変更メソッド
 
     private void Awake(){
-        //Camera取得
+        //メインカメラ取得
         Camera = GetComponent<Camera>();
 
-        for (int i = 0; i < UseColor.Length; i++){
-            UseColor[i] = Interface_UseColor[i];
+        //使用する背景色を取得
+        for (int i = 0; i < BackgroundColor.Length; i++){
+            BackgroundColor[i] = Paint.Int2Name(i);
         }
-        FlashCount = Interface_FlashCount;
-        FlashTime = Interface_FlashTime;
 
-        FlashCount = (FlashCount % 2 == 0) ? FlashCount + 1 : FlashCount;//点滅回数は奇数回
+        //初期背景色設定
+        NowBackgroundColor = Paint.Int2Name(Random.Range(0, 3));
+        Camera.backgroundColor = Paint.GetColor(NowBackgroundColor);
     }
  
 }

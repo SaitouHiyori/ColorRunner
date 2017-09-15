@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Item : MonoBehaviour {
     public enum ItemJanle {Coin,Gasoline };
     public ItemJanle Janle;
@@ -14,9 +16,15 @@ public class Item : MonoBehaviour {
 
     public float Speed;
 
+    private AudioSource AudioSource;
+    public AudioClip ItemSound;
+
+    public Player Player;
+
     //アイテムジャンル別処理
     private void ItemAction_Coin(){
-        GameManager.Add_GameScore(Score);
+        GameManager.Score = Score;
+        
         Destroy(this.gameObject);
     }//コイン
 
@@ -26,6 +34,8 @@ public class Item : MonoBehaviour {
     }//ガソリン
 
     private void Awake(){
+        AudioSource = GetComponent<AudioSource>();
+
         //接触時アクション決定
         switch (Janle){
             case ItemJanle.Coin:
@@ -37,6 +47,9 @@ public class Item : MonoBehaviour {
             default:
                 break;
         }
+
+        //接触時サウンドエフェクト設定
+        AudioSource.clip = ItemSound;
     }
 
 	void Update () {
@@ -52,6 +65,8 @@ public class Item : MonoBehaviour {
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
+            AudioSource.Play();
+            Debug.Log(ItemSound);
             Action();
         }
     }

@@ -14,7 +14,7 @@ public class ItemFactory : MonoBehaviour {
     //生成物一覧
     public GameObject[] Item;
 
-    private void Update(){
+    public void Move(){
         //生成間隔を計る
         Timer += Time.deltaTime;
         if(Timer >= SetInstanceInterval){
@@ -25,8 +25,8 @@ public class ItemFactory : MonoBehaviour {
             int InstanceRoteNum;
             while (true){
                 InstanceRoteNum = Random.Range(0, GameRoot.Rote.Length);
-                if(InstanceRoteNum != CameraController.NowColorNum){
-                    break;
+                if(InstanceRoteNum != (int)CameraController.NowBackgroundColor){
+                    break;//背景色と同じ色の道には生成しない
                 }
             }
 
@@ -39,103 +39,5 @@ public class ItemFactory : MonoBehaviour {
             SetInstanceInterval = InstanceInterval[Random.Range(0, InstanceInterval.Length)];
         }
     }
-
-    //    int IsEnemy;
-    //    public float PerCent;
-    //    GameRoot GR;
-
-    //    bool IsInstance(){
-    //        int x = Random.Range(1, 101);
-
-    //        if(x % PerCent == 0){
-    //            Debug.Log("Instance");
-    //            return true;
-    //        }
-    //        else{
-    //            Debug.Log("NotInstance");
-    //            return false;
-    //        }
-    //    }
-
-    //    bool IsRedRote(){
-    //        int x = Random.Range(1, 101);
-
-    //        if (x % PerCent == 0){
-    //            return true;
-    //        }
-    //        else {
-    //            return false;
-    //        }
-    //    }
-
-    //    bool IsBlueRote(){
-    //        int x = Random.Range(1, 101);
-
-    //        if (x % PerCent == 0){
-    //            return true;
-    //        }
-    //        else {
-    //            return false;
-    //        }
-    //    }
-
-    //    bool IsGreenRote(){
-    //        int x = Random.Range(1, 101);
-
-    //        if(x % PerCent == 0){
-    //            return true;
-    //        }
-    //        else{
-    //            return false;
-    //        }
-    //    }
-
-    //	void Start () {
-    //        //GameObjectを保存
-    //        Item[0] = (GameObject)Resources.Load("Character/Enemy");
-    //        Item[1] = (GameObject)Resources.Load("Item/Coin");
-
-    //        GR = GameObject.Find("GameRoots").GetComponent<GameRoot>();
-    //    }
-
-    //	void Update () {
-    //        //デバッグ用フラグ
-    //        if (GameManager.Get_GameFlag())
-    //        {
-    //            Timer += Time.deltaTime;
-
-    //            if (Timer > InstanceInterval)
-    //            {
-    //                if (IsRedRote())
-    //                {
-    //                    if (GR.NowColor == "Red")
-    //                    {
-    //                        return;
-    //                    }
-    //                    IsEnemy = Random.Range(0, 2);
-    //                    Instantiate(Item[IsEnemy], RedRote, Quaternion.Euler(InstantRotation));
-    //                }
-    //                if (IsBlueRote())
-    //                {
-    //                    if (GR.NowColor == "Blue")
-    //                    {
-    //                        return;
-    //                    }
-    //                    IsEnemy = Random.Range(0, 2);
-    //                    Instantiate(Item[IsEnemy], BlueRote, Quaternion.Euler(InstantRotation));
-    //                }
-    //                if (IsGreenRote())
-    //                {
-    //                    if (GR.NowColor == "Green")
-    //                    {
-    //                        return;
-    //                    }
-    //                    IsEnemy = Random.Range(0, 2);
-    //                    Instantiate(Item[IsEnemy], GreenRote, Quaternion.Euler(InstantRotation));
-    //                }
-    //                Timer = 0;
-    //            }
-    //        }
-    //	}
 
 }

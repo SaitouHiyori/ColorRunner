@@ -9,38 +9,64 @@ public class GameRoot : MonoBehaviour {
 
     //道
     public static GameObject[] Rote = new GameObject[3];
-    public GameObject[] Interface_Rote;
+    public GameObject[] Interface_Rote;//外部入力用
 
     private CameraController CameraController;
+
+    private bool GameF;
+
+    //各種オブジェクト
+    private Player Player;
+    public ItemFactory ItemFactory;
 
     public static void RoteBehind(){
         //全ての道を判定
         for (int i = 0; i < Rote.Length; i++){
             //背景色と同じ色の道は消失
             //異なる色の道は出現
-            Rote[i].SetActive((i == CameraController.NowColorNum) ? false : true);
+            Rote[i].SetActive((i == (int)CameraController.NowBackgroundColor) ? false : true);
         }
 
         ChangeTimer = 0;//タイマーリセット
     }//道消失出現メソッド
 
+    private void GameOver(){
+        Debug.Log("GameOver");
+        GameF = false;
+    }
+
 	void Awake () {
+        GameManager.Flag = true;
+        GameF = GameManager.Flag;
+
+        //各種オブジェクト取得
+        Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         CameraController = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
 
         //道設定
         for (int i = 0; i < Interface_Rote.Length; i++){
             Rote[i] = Interface_Rote[i];//オブジェクト登録
-            Rote[i].GetComponent<Renderer>().material.color = CameraController.UseColor[i];
+            Rote[i].GetComponent<Renderer>().material.color = Paint.GetColor(Paint.Int2Name(i));//色設定
         }
 
-        ChangeTimer = 0;//タイマー初期化
+        RoteBehind();
     }
 	
 	void Update () {
-        ChangeTimer += Time.deltaTime;
+        if (GameManager.Flag) {
+        ChangeTimer += Time.deltaTime;//時間計測
 
-        if(ChangeTimer >= ChangeInterval && !CameraController.IsFlash){//点滅開始
-            CameraController.ColorChanger();
+            if (ChangeTimer >= ChangeInterval && !CameraController.IsFlash){//点滅開始
+                CameraController.ColorChanger();
+            }
+
+            Player.Move();
+            ItemFactory.Move();
+        }
+        else{
+            if (GameF){
+                GameOver();
+            }
         }
 	}
 }
