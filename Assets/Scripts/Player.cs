@@ -11,9 +11,17 @@ public class Player : MonoBehaviour {
     public float UnderLimmite;
 
     //ガソリン
-    public float Gasoline;//現在ガソリン量
+    public static float GasolineTank;//現在ガソリン量
     public float UseGasoline;//ガソリン消費量
-    public float MaxGasoline;//ガソリン最大値
+    public static float MaxGasoline = 100;//ガソリン最大値
+    public float Gasoline{
+        set{
+            GasolineTank = value;
+        }
+        get{
+            return GasolineTank;
+        }
+    }
 
     //弾丸
     public GameObject BulletPre;//弾丸プレファブ
@@ -46,17 +54,18 @@ public class Player : MonoBehaviour {
         BulletObj.GetComponent<Bullet>().SetColor(AttackColor);//攻撃色設定
     }//攻撃メソッド
 
-    public void AddGasoline(float HowMenyGasoline){
+    public static void AddGasoline(float HowMenyGasoline){
         //ガソリン補充
-        Gasoline += HowMenyGasoline;
+        GasolineTank += HowMenyGasoline;
         //ガソリンは一定量までしか入らない
-        if (Gasoline > MaxGasoline){
-            Gasoline = MaxGasoline;
+        if (GasolineTank > MaxGasoline){
+            GasolineTank = MaxGasoline;
         }
     }//ガソリン補充メソッド
 
 
 	void Awake () {
+        Gasoline = MaxGasoline;
         PlayerTransform = GameObject.FindWithTag("Player").transform;
         AudioSource = GetComponent<AudioSource>();
 
@@ -89,7 +98,10 @@ public class Player : MonoBehaviour {
         GUIStyle Style = new GUIStyle();
         Style.fontSize = 40;
 
-        GUI.Label(new Rect(0, 0, 100, 100), Score,Style);
-        GUI.Label(new Rect(0,40,100,100), GasolineMater,Style);
+        if (GameManager.Flag){
+            GUI.Label(new Rect(0, 0, 100, 100), Score, Style);
+            GUI.Label(new Rect(0, 40, 100, 100), GasolineMater, Style);
+        }
+
     }
 }
