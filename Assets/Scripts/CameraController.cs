@@ -58,6 +58,7 @@ public class CameraController : MonoBehaviour {
     private IEnumerator Flash(Paint.Name NowColor, Paint.Name NewColor){
         //点滅開始
         IsFlash = true;
+        NowBackgroundColor = Paint.Name.Non;
 
         //点滅メソッド呼出
         yield return StartCoroutine(Flashing(NowColor, NewColor));
@@ -87,12 +88,12 @@ public class CameraController : MonoBehaviour {
         Camera = GetComponent<Camera>();
 
         //使用する背景色を取得
-        for (int i = 0; i < BackgroundColor.Length; i++){
+        for (int i = 0; i <= BackgroundColor.Length; i++){
             BackgroundColor[i] = Paint.Int2Name(i);
         }
 
         //初期背景色設定
-        NowBackgroundColor = Paint.Int2Name(Random.Range(0, 3));
+        NowBackgroundColor = Paint.Int2Name(Random.Range(1, 4));
         Camera.backgroundColor = Paint.GetColor(NowBackgroundColor);
     }
  

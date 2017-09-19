@@ -18,6 +18,7 @@ public class GameRoot : MonoBehaviour {
     //各種オブジェクト
     private Player Player;
     public ItemFactory ItemFactory;
+    public SceneRuler SceneRuler;
 
     public static void RoteBehind(){
         //全ての道を判定
@@ -31,12 +32,14 @@ public class GameRoot : MonoBehaviour {
     }//道消失出現メソッド
 
     private void GameOver(){
-        Debug.Log("GameOver");
+        //Debug.Log("GameOver");
+        SceneRuler.SceneChange();
         GameF = false;
     }
 
 	void Awake () {
         GameManager.Flag = true;
+        GameManager.Reset_GameScore();
         GameF = GameManager.Flag;
 
         //各種オブジェクト取得
@@ -46,7 +49,7 @@ public class GameRoot : MonoBehaviour {
         //道設定
         for (int i = 0; i < Interface_Rote.Length; i++){
             Rote[i] = Interface_Rote[i];//オブジェクト登録
-            Rote[i].GetComponent<Renderer>().material.color = Paint.GetColor(Paint.Int2Name(i));//色設定
+            Rote[i].GetComponent<Renderer>().material.color = Paint.GetColor(Paint.Int2Name(i + 1));//色設定
         }
 
         RoteBehind();
