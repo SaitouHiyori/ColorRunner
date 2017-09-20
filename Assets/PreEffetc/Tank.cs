@@ -6,16 +6,16 @@ public class Tank : MonoBehaviour {
 
     public Animator animator;
 
-    Vector3 BarrelVec;
-    float Barrel_Back = -20f;
-    float Barrel_return = 2.0f;
+    //Vector3 BarrelVec;
+    //float Barrel_Back = -20f;
+    //float Barrel_return = 2.0f;
 
-    bool Barrelflag = true;
-    int i;
+    //bool Barrelflag = true;
+    //int i;
 
     // Use this for initialization
     void Start () {
-        BarrelVec = transform.position;
+        //BarrelVec = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -29,6 +29,8 @@ public class Tank : MonoBehaviour {
         {
             animator.SetBool("fire", false);
         }
+
+        /*
         //program
         if (Barrelflag = true && Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -48,8 +50,8 @@ public class Tank : MonoBehaviour {
             {
                 Barrelflag = true;
                 i = 0;
-                Debug.Log("true");
             }
         }
+        */
 	}
 }

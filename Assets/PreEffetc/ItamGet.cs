@@ -2,29 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PSCont : MonoBehaviour
-{
+public class ItamGet : MonoBehaviour {
+
     private ParticleSystem particle;
-    public static bool Smoke = false;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start () {
         particle = GetComponent<ParticleSystem>();
 
         particle.Stop();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Smoke == true)
+    void Update () {
+        if (Input.GetKey(KeyCode.G))
         {
             particle.Play();
-        }
-        else
-        {
-            particle.Stop();
         }
     }
 }

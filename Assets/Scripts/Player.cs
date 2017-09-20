@@ -30,14 +30,22 @@ public class Player : MonoBehaviour {
         if(GameManager.Get_GameFlag() == false){
             MoveToBlue();
         }
-
         Vector3 NowPos = transform.position;
-
         //緑から落ちると上に行く
-        if (NowPos.y <= UnderLimmite){
+        if (NowPos.y <= UnderLimmite)
+        {
             NowPos.y = TopLimmite;
             transform.position = NowPos;
         }
+
+        if(GetComponent<Rigidbody>().velocity.y  != 0){
+            //アニメーションフラグをtrueにする
+            TankMain.Tankdown = true;
+        }
+        else{
+            TankMain.Tankdown = false;
+        }
+
 
         ////移動（矢印キー）
         //if (Input.GetKeyDown(KeyCode.UpArrow)){
