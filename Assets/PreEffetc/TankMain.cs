@@ -32,10 +32,16 @@ public class TankMain : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 animator.SetBool("Tank_Fire", true);
+                BulletFire.bulletFire = true;
+                Tank.burrelbuck = true;
+                BulletFire.bulletFire = true;
             }
             else
             {
                 animator.SetBool("Tank_Fire", false);
+                BulletFire.bulletFire = false;
+                Tank.burrelbuck = false;
+                BulletFire.bulletFire = false;
             }
         }
         else
