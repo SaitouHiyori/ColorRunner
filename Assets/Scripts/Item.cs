@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour {
-    public enum ItemJanle {Coin,Gasoline };
-    public ItemJanle Janle;
+    public enum ItemJanle {Coin,Gasoline };//アイテム種類
+    public ItemJanle Janle;//選択された種類
 
-    delegate void ItemAction();
-    ItemAction Action;
+    delegate void ItemAction();//選択式アイテム挙動
+    ItemAction Action;//選択された挙動
 
-    public int Score;
-    public float Gasoline;
+    public float Speed;//移動速度
 
-    public float Speed;
+    public int Score;//取得スコア
+    //public int Gasoline;
+    public AudioClip ItemSound;//取得音
 
-    public AudioClip ItemSound;
+    public float TopLimmite;
+    public float UnderLimmite;
+
+    public Vector3 Roll;
+    public float AddDeg;//回転量
 
     public Player Player;
 
@@ -26,7 +31,7 @@ public class Item : MonoBehaviour {
     }//コイン
 
     private void ItemAction_Gasoline(){
-        Player.AddGasoline(Gasoline);
+        Player.AddGasoline(Score);
         Destroy(this.gameObject);
     }//ガソリン
 
@@ -52,9 +57,24 @@ public class Item : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
+        Vector3 NowPos = transform.position;
+
+        //下に落ちると上に行く
+        if (NowPos.y <= UnderLimmite){
+            NowPos.y = TopLimmite;
+            transform.position = NowPos;
+        }
+
+
         //移動
         Vector3 Move = new Vector3(-Speed, 0, 0);
         transform.position += Move;
+
+        //回転
+        
+        Roll.z += AddDeg * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(Roll);
+
     }
 
     void OnTriggerEnter(Collider other){

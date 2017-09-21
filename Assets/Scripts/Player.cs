@@ -23,6 +23,10 @@ public class Player : MonoBehaviour {
         }
     }
 
+    //移動スコア
+    private int RunScore;//走った距離
+    public float RunScoreInterval;//スコア取得間隔
+
     //弾丸
     public GameObject BulletPre;//弾丸プレファブ
     private GameObject BulletObj;//弾丸インスタンス
@@ -63,8 +67,18 @@ public class Player : MonoBehaviour {
         }
     }//ガソリン補充メソッド
 
+    private IEnumerator Running(){
+        while (true){
+            if (!GameManager.Flag){
+                GameManager.Score = RunScore;
+                break;
+            }
+            yield return new WaitForSeconds(RunScoreInterval);
+            RunScore++;//スコア加算
+        }
+    }
 
-	void Awake () {
+    void Awake () {
         Gasoline = MaxGasoline;
         PlayerTransform = GameObject.FindWithTag("Player").transform;
         AudioSource = GetComponent<AudioSource>();
@@ -72,10 +86,15 @@ public class Player : MonoBehaviour {
         //プレイヤーオブジェクトは初期位置へ移動
         PlayerTransform.position = MovePos[1];//初期位置：真ん中
 
+        //StartCoroutine(Running());
     }
 	
+    private void Start(){
+        StartCoroutine(Running());//走り出す
+    }
+
 	public void Move () {
-            Vector3 NowPos = PlayerTransform.position;
+
 
             Gasoline -= UseGasoline * Time.deltaTime;//ガソリンを消費する
             //ガソリンがなくなると車は動かない
@@ -83,8 +102,10 @@ public class Player : MonoBehaviour {
             GameManager.Flag = false;
             }
 
-            //下に落ちると上に行く
-            if (NowPos.y <= UnderLimmite){
+        Vector3 NowPos = PlayerTransform.position;
+
+        //下に落ちると上に行く
+        if (NowPos.y <= UnderLimmite){
                 NowPos.y = TopLimmite;
                 PlayerTransform.position = NowPos;
             }
@@ -93,14 +114,16 @@ public class Player : MonoBehaviour {
 
     void OnGUI(){
         string Score = "Score:" + GameManager.Score;
+        string RunAway = string.Format("RunAway:{0}m", RunScore);
         string GasolineMater = string.Format("Gasoline:{0:###}%", Gasoline / MaxGasoline * 100);
 
         GUIStyle Style = new GUIStyle();
-        Style.fontSize = 40;
+        Style.fontSize = 30;
 
         if (GameManager.Flag){
             GUI.Label(new Rect(0, 0, 100, 100), Score, Style);
-            GUI.Label(new Rect(0, 40, 100, 100), GasolineMater, Style);
+            GUI.Label(new Rect(0, 30, 100, 100), RunAway, Style);
+            GUI.Label(new Rect(0, 60, 100, 100), GasolineMater, Style);
         }
 
     }

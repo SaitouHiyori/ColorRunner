@@ -10,15 +10,14 @@ public class Enemy : MonoBehaviour {
     public float Speed;//移動速度
     public float LeftLimitte;//消失点
 
+    public float TopLimmite;
+    public float UnderLimmite;
+
     public void ColorChanger(Paint.Name NewColor){
         //色変更
         NowColor = NewColor;
         GetComponent<Renderer>().material.color = Paint.GetColor(NowColor);
 
-        //背景と同化したら消滅
-        if (CameraController.NowBackgroundColor == NowColor){
-            Destroy(this.gameObject);
-        }
     }//本体色変更メソッド
 
     private void Awake () {
@@ -35,6 +34,20 @@ public class Enemy : MonoBehaviour {
         if(this.transform.position.x < LeftLimitte){
             Destroy(this.gameObject);
         }
+
+        //背景と同化したら消滅
+        if (CameraController.NowBackgroundColor == NowColor){
+            Destroy(this.gameObject);
+        }
+
+        Vector3 NowPos = transform.position;
+
+        //下に落ちると上に行く
+        if (NowPos.y <= UnderLimmite){
+            NowPos.y = TopLimmite;
+            transform.position = NowPos;
+        }
+
 
         //移動
         Vector3 Move = new Vector3(-Speed, 0, 0);

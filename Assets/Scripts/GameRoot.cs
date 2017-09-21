@@ -32,7 +32,6 @@ public class GameRoot : MonoBehaviour {
     }//道消失出現メソッド
 
     private void GameOver(){
-        //Debug.Log("GameOver");
         SceneRuler.SceneChange();
         GameF = false;
     }
@@ -49,12 +48,16 @@ public class GameRoot : MonoBehaviour {
         //道設定
         for (int i = 0; i < Interface_Rote.Length; i++){
             Rote[i] = Interface_Rote[i];//オブジェクト登録
-            Rote[i].GetComponent<Renderer>().material.color = Paint.GetColor(Paint.Int2Name(i + 1));//色設定
+            Rote[i].GetComponent<Renderer>().material.color = Paint.GetColor(Paint.Int2Name(i));//色設定
         }
 
-        RoteBehind();
+        //RoteBehind();
     }
 	
+    private void Start(){
+        RoteBehind();
+    }
+
 	void Update () {
         if (GameManager.Flag) {
         ChangeTimer += Time.deltaTime;//時間計測

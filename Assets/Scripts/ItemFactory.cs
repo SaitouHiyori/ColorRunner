@@ -9,10 +9,16 @@ public class ItemFactory : MonoBehaviour {
 
     //生成位置・生成物回転
     private Vector3[] InstancePos = new Vector3[] { new Vector3(15, 6, 0), new Vector3(15, 1, 0), new Vector3(15, -4, 0) };
-    private Vector3 InstanceRotation = new Vector3(90, 0, 0);
+    public Vector3[] InstanceRotation;
 
     //生成物一覧
     public GameObject[] Item;
+
+    //private GameRoot GameRoot;
+
+    private void Awake(){
+        //GameRoot = GetComponent<GameRoot>();
+    }
 
     public void Move(){
         //生成間隔を計る
@@ -25,13 +31,16 @@ public class ItemFactory : MonoBehaviour {
             int InstanceRoteNum;
             while (true){
                 InstanceRoteNum = Random.Range(0, GameRoot.Rote.Length);
-                if(InstanceRoteNum != (int)CameraController.NowBackgroundColor){
-                    break;//背景色と同じ色の道には生成しない
+                if (GameRoot.Rote[InstanceRoteNum].activeInHierarchy){
+                    break;
                 }
+                //if(InstanceRoteNum != (int)CameraController.NowBackgroundColor){
+                //    break;//背景色と同じ色の道には生成しない
+                //}
             }
 
             //アイテム生成
-            Instantiate(Item[InstanceItemNum], InstancePos[InstanceRoteNum], Quaternion.Euler(InstanceRotation));
+            Instantiate(Item[InstanceItemNum], InstancePos[InstanceRoteNum], Quaternion.Euler(InstanceRotation[InstanceItemNum]));
 
             //タイマーリセット
             Timer = 0;
