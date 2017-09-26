@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour {
     private IEnumerator Flash(Paint.Name NowColor, Paint.Name NewColor){
         //点滅開始
         IsFlash = true;
-        NowBackgroundColor = Paint.Name.Non;
+        NowBackgroundColor = Paint.Name.Change;
 
         //点滅メソッド呼出
         yield return StartCoroutine(Flashing(NowColor, NewColor));

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-    //本体色
-    private int BodyColorCount;//使用する本体色数
+    ////本体色
+    //private int BodyColorCount;//使用する本体色数
     public Paint.Name NowColor;//現在の本体色
+
 
     public float Speed;//移動速度
     public float LeftLimitte;//消失点
@@ -13,20 +14,22 @@ public class Enemy : MonoBehaviour {
     public float TopLimmite;
     public float UnderLimmite;
 
-    public void ColorChanger(Paint.Name NewColor){
-        //色変更
-        NowColor = NewColor;
-        GetComponent<Renderer>().material.color = Paint.GetColor(NowColor);
+    //public void ColorChanger(Paint.Name NewColor){
+    //    //色変更
+    //    NowColor = NewColor;
+    //    GetComponent<Renderer>().material.color = Paint.GetColor(NowColor);
 
-    }//本体色変更メソッド
+    //}//本体色変更メソッド
 
     private void Awake () {
-        //本体色数取得
-        BodyColorCount = System.Enum.GetNames(typeof(Paint.Name)).Length;
+        ////本体色数取得
+        //BodyColorCount = System.Enum.GetNames(typeof(Paint.Name)).Length;
 
-        //ランダムに色を決定
-        int FirstColor = Random.Range(0, BodyColorCount);
-        ColorChanger(Paint.Int2Name(FirstColor));
+        ////ランダムに色を決定
+        //int FirstColor = Random.Range(0, BodyColorCount);
+        //ColorChanger(Paint.Int2Name(FirstColor));
+
+        NowColor = Paint.Name.Non;
     }
 
     private void Update () {

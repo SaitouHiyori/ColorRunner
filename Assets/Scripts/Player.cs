@@ -31,9 +31,10 @@ public class Player : MonoBehaviour {
     public GameObject BulletPre;//弾丸プレファブ
     private GameObject BulletObj;//弾丸インスタンス
     public Paint.Name AttackColor;//発射する弾の色
+    public Vector3 BulletShotPos;
 
     //移動位置
-    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8,6,0), new Vector3(-8,1,0), new Vector3(-8,-4,0) };
+    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8, 6.5f, 0), new Vector3(-8, 1.5f, 0), new Vector3(-8, -3.5f, 0) };
     private static Transform PlayerTransform;
 
     //Audio
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour {
     }
 
     public void Shot(){
-        BulletObj = (GameObject)Instantiate(BulletPre,transform.position,Quaternion.identity);//弾生成
+        BulletObj = (GameObject)Instantiate(BulletPre,transform.position + BulletShotPos,Quaternion.identity);//弾生成
         BulletObj.GetComponent<Bullet>().SetColor(AttackColor);//攻撃色設定
     }//攻撃メソッド
 
