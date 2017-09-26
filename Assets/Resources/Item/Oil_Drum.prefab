@@ -96,9 +96,13 @@ MonoBehaviour:
   Janle: 1
   Speed: 0.1
   Score: 5
-  ItemSound: {fileID: 0}
+  ItemSound: {fileID: 8300000, guid: 21b8b609919827245ac4fcaf0b612610, type: 3}
+  SEPlayerPre: {fileID: 1652530483100038, guid: c8fb2ee7f93dbf34d9cd9240087450dd,
+    type: 2}
   TopLimmite: 9
   UnderLimmite: -6.5
+  Roll: {x: 0, y: 0, z: 0}
+  AddDeg: 0
   Player: {fileID: 0}
 --- !u!136 &136010845223181014
 CapsuleCollider:

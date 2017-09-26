@@ -12,8 +12,8 @@ public class Item : MonoBehaviour {
     public float Speed;//移動速度
 
     public int Score;//取得スコア
-    //public int Gasoline;
     public AudioClip ItemSound;//取得音
+    public GameObject SEPlayerPre;//取得音再生オブジェクト
 
     public float TopLimmite;
     public float UnderLimmite;
@@ -49,6 +49,8 @@ public class Item : MonoBehaviour {
                 break;
         }
 
+        //取得音設定
+
     }
 
 	void Update () {
@@ -79,9 +81,9 @@ public class Item : MonoBehaviour {
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
-            AudioSource PlayerAudiosource = other.gameObject.GetComponent<AudioSource>();
-            PlayerAudiosource.clip = ItemSound;
-            PlayerAudiosource.Play();
+            GameObject SEPlayer = Instantiate(SEPlayerPre);//効果音生成
+            SEPlayer.GetComponent<AudioSource>().clip = ItemSound;//効果音設定
+            SEPlayer.GetComponent<ItemGetSound>().SEPlay();//効果音再生
             Action();
         }
     }

@@ -39,6 +39,10 @@ public class Player : MonoBehaviour {
     //Audio
     private AudioSource AudioSource;
     public AudioClip SoundEfect;
+    public float GetItemSETime;//SE再生時間
+    private static float SETimer;
+    private float BeforTimer;
+    private bool IsMute;
 
     //ボタンアクション
     public void RoteChange(Paint.Name RoteColor){
@@ -77,6 +81,38 @@ public class Player : MonoBehaviour {
             RunScore++;//スコア加算
         }
     }
+
+    //private IEnumerator SEMuter(){
+    //    SETimer = 0;//タイマーリセット
+    //    BeforTimer = 0;
+
+    //    while (SETimer <= GetItemSETime){
+    //        if (BeforTimer > SETimer){
+    //            yield break;
+    //        }
+    //            yield return new WaitForSeconds(Time.deltaTime);
+    //            SETimer += Time.deltaTime;
+    //            BeforTimer = SETimer;
+    //    }
+    //    AudioSource.Stop();
+
+    //    //if (IsMute){
+    //    //    yield break;
+    //    //}
+    //    //else {
+    //    //    IsMute = true;
+    //    //    yield return new WaitForSeconds(GetItemSETime);
+    //    //    AudioSource.Stop();
+    //    //} 
+    //    //    IsMute = false;
+    //}
+
+    //public void PlaySE(AudioClip SE){
+    //    AudioSource.clip = SE;
+    //    //StopCoroutine(SEMuter());
+    //    AudioSource.Play();//再生開始
+    //    StartCoroutine(SEMuter());//消音までカウントダウン開始
+    //}
 
     void Awake () {
         Gasoline = MaxGasoline;

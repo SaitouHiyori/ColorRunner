@@ -32,8 +32,13 @@ public class GameRoot : MonoBehaviour {
     }//道消失出現メソッド
 
     private void GameOver(){
-        SceneRuler.SceneChange();
-        GameF = false;
+        //敗北演出
+
+
+        if (Input.GetButtonDown("Fire1")){
+            SceneRuler.SceneChange();
+            GameF = false;
+        }
     }
 
 	void Awake () {
