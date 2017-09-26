@@ -6,6 +6,7 @@ public class BulletFire : MonoBehaviour {
 
     private ParticleSystem particle;
     public static bool bulletFire = false;
+    public Animator animator;
 
     // Use this for initialization
     void Start ()
@@ -20,7 +21,7 @@ public class BulletFire : MonoBehaviour {
     {
         if (GameManager.Get_GameFlag() == true)
         {
-            if (bulletFire == true)
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 particle.Play();
             }
