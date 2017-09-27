@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Enemy"){
             //接触したEnemyを攻撃色に変更する
-            other.gameObject.GetComponent<Enemy>().NowColor = AttackColor;
+            other.GetComponentInParent<Enemy>().NowColor = AttackColor;
             Destroy(this.gameObject);
         }
     }

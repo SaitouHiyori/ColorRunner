@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour
-{
+public class ButtonManager : MonoBehaviour{
     //プレイヤー関連のボタンを管理する
 
     //ボタン種類

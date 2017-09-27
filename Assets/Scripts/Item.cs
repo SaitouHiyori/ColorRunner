@@ -26,12 +26,13 @@ public class Item : MonoBehaviour {
     //アイテムジャンル別処理
     private void ItemAction_Coin(){
         GameManager.Score = Score;
-        
+        Player.IsItemGet();
         Destroy(this.gameObject);
     }//コイン
 
     private void ItemAction_Gasoline(){
         Player.AddGasoline(Score);
+        Player.IsItemGet();
         Destroy(this.gameObject);
     }//ガソリン
 
@@ -48,8 +49,6 @@ public class Item : MonoBehaviour {
             default:
                 break;
         }
-
-        //取得音設定
 
     }
 
@@ -81,6 +80,7 @@ public class Item : MonoBehaviour {
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
+            Player = other.gameObject.GetComponent<Player>();
             GameObject SEPlayer = Instantiate(SEPlayerPre);//効果音生成
             SEPlayer.GetComponent<AudioSource>().clip = ItemSound;//効果音設定
             SEPlayer.GetComponent<ItemGetSound>().SEPlay();//効果音再生

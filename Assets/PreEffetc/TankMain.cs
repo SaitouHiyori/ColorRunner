@@ -4,51 +4,43 @@ using UnityEngine;
 
 public class TankMain : MonoBehaviour {
 
-    public　static bool Tankdown = false;
-    public Animator animator;
+    public　static bool IsFall = false;
+    public static bool IsShot = false;
+    public Animator Animator;
 
-    // Use this for initialization
-    void Start () {
-	}
-	
-	// Update is called once per frame
+
 	void Update () {
-        if (GameManager.Flag)
-        {
+        if (GameManager.Flag){
             //土煙
-            if (Tankdown == true)
-            {
+            if (IsFall){
                 PSCont.Smoke = false;
-                animator.SetBool("Tank_Down", true);
+                Animator.SetBool("Tank_Down", true);
             }
-            else if (Tankdown == false)
-            {
+            else{
                 PSCont.Smoke = true;
-                animator.SetBool("Tank_Down", false);
+                Animator.SetBool("Tank_Down", false);
             }
-
 
             //射撃
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                animator.SetBool("Tank_Fire", true);
+            if (IsShot){
+                Animator.SetBool("Tank_Fire", true);
                 BulletFire.bulletFire = true;
                 Tank.burrelbuck = true;
                 BulletFire.bulletFire = true;
+                IsShot = false;
             }
-            else
-            {
-                animator.SetBool("Tank_Fire", false);
+            else{
+                Animator.SetBool("Tank_Fire", false);
                 BulletFire.bulletFire = false;
                 Tank.burrelbuck = false;
                 BulletFire.bulletFire = false;
             }
         }
-        else
-        {
+
+        else{
             PSCont.Smoke = false;
-            animator.SetBool("Tank_Down", false);
-            animator.SetBool("Tank_Fire", false);
+            Animator.SetBool("Tank_Down", false);
+            Animator.SetBool("Tank_Fire", false);
         }
     }
 }

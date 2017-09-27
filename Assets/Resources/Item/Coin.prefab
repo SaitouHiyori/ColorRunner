@@ -114,11 +114,12 @@ MonoBehaviour:
   Speed: 0.1
   Score: 5
   ItemSound: {fileID: 0}
-  SEPlayer: {fileID: 1652530483100038, guid: c8fb2ee7f93dbf34d9cd9240087450dd, type: 2}
+  SEPlayerPre: {fileID: 0}
   TopLimmite: 0
   UnderLimmite: 0
   Roll: {x: 0, y: 0, z: 0}
   AddDeg: 0
+  GetAction: {fileID: 2100000, guid: 036e0b451f2bdd34c8afa46c17750895, type: 2}
   Player: {fileID: 0}
 --- !u!136 &136255007054963580
 CapsuleCollider:

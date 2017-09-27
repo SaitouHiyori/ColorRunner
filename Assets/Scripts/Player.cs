@@ -45,6 +45,11 @@ public class Player : MonoBehaviour {
     private float BeforTimer;
     private bool IsMute;
 
+    //ItemGetIcon
+    public GameObject ItemGetIcon;
+    public Vector3 ItemGetIconPos;
+    public Vector3 ItemGetIconRoll;
+
     //ボタンアクション
     public void RoteChange(Paint.Name RoteColor){
         //背景色と同じ色の道には移動できない
@@ -61,6 +66,7 @@ public class Player : MonoBehaviour {
     public void Shot(){
         BulletObj = (GameObject)Instantiate(BulletPre,transform.position + BulletShotPos,Quaternion.identity);//弾生成
         BulletObj.GetComponent<Bullet>().SetColor(AttackColor);//攻撃色設定
+        TankMain.IsShot = true;
     }//攻撃メソッド
 
     public static void AddGasoline(float HowMenyGasoline){
@@ -83,37 +89,9 @@ public class Player : MonoBehaviour {
         }
     }
 
-    //private IEnumerator SEMuter(){
-    //    SETimer = 0;//タイマーリセット
-    //    BeforTimer = 0;
-
-    //    while (SETimer <= GetItemSETime){
-    //        if (BeforTimer > SETimer){
-    //            yield break;
-    //        }
-    //            yield return new WaitForSeconds(Time.deltaTime);
-    //            SETimer += Time.deltaTime;
-    //            BeforTimer = SETimer;
-    //    }
-    //    AudioSource.Stop();
-
-    //    //if (IsMute){
-    //    //    yield break;
-    //    //}
-    //    //else {
-    //    //    IsMute = true;
-    //    //    yield return new WaitForSeconds(GetItemSETime);
-    //    //    AudioSource.Stop();
-    //    //} 
-    //    //    IsMute = false;
-    //}
-
-    //public void PlaySE(AudioClip SE){
-    //    AudioSource.clip = SE;
-    //    //StopCoroutine(SEMuter());
-    //    AudioSource.Play();//再生開始
-    //    StartCoroutine(SEMuter());//消音までカウントダウン開始
-    //}
+    public void IsItemGet(){
+        Instantiate(ItemGetIcon, transform.position + ItemGetIconPos, Quaternion.Euler(ItemGetIconRoll));
+    }
 
     void Awake () {
         Gasoline = MaxGasoline;
@@ -122,8 +100,6 @@ public class Player : MonoBehaviour {
 
         //プレイヤーオブジェクトは初期位置へ移動
         PlayerTransform.position = MovePos[1];//初期位置：真ん中
-
-        //StartCoroutine(Running());
     }
 	
     private void Start(){
@@ -146,6 +122,8 @@ public class Player : MonoBehaviour {
                 NowPos.y = TopLimmite;
                 PlayerTransform.position = NowPos;
             }
+
+        TankMain.IsFall = (GetComponent<Rigidbody>().velocity.y < 0) ? true : false;
 
     }
 
