@@ -2264,6 +2264,8 @@ GameObject:
   - component: {fileID: 1697636633}
   - component: {fileID: 1697636634}
   - component: {fileID: 1697636632}
+  - component: {fileID: 1697636635}
+  - component: {fileID: 1697636636}
   m_Layer: 0
   m_Name: GameRoots
   m_TagString: Untagged
@@ -2323,6 +2325,29 @@ MonoBehaviour:
   - {fileID: 1384220981}
   ItemFactory: {fileID: 1697636632}
   SceneRuler: {fileID: 1487919268}
+--- !u!114 &1697636635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1697636631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0017e9f3809bd0b4a9e24b2414087880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1697636636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1697636631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb2c974158dc3245adb16629047bb1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorebord: {fileID: 0}
 --- !u!1001 &1731915503
 Prefab:
   m_ObjectHideFlags: 0
