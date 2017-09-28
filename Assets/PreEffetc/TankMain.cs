@@ -15,7 +15,7 @@ public class TankMain : MonoBehaviour {
 	void Update () {
         if (GameManager.Get_GameFlag() == true)
         {
-            //土煙
+            //土煙、落下中の処理
             if (Tankdown == true)
             {
                 PSCont.Smoke = false;
