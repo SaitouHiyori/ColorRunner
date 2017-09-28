@@ -8,7 +8,7 @@ public class ItemFactory : MonoBehaviour {
     public float SetInstanceInterval;//選択中の生成間隔
 
     //生成位置・生成物回転
-    private Vector3[] InstancePos = new Vector3[] { new Vector3(15, 6, 0), new Vector3(15, 1, 0), new Vector3(15, -4, 0) };
+    private Vector3[] InstancePos = new Vector3[] { new Vector3(15, 6.5f, 0), new Vector3(15, 1.5f, 0), new Vector3(15, -3.5f, 0) };
     public Vector3[] InstanceRotation;
 
     //生成物一覧
