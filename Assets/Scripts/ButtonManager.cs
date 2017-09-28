@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour
-{
+public class ButtonManager : MonoBehaviour{
     //プレイヤー関連のボタンを管理する
 
     //ボタン種類
@@ -26,10 +25,8 @@ public class ButtonManager : MonoBehaviour
 
     private Image ButtonColor;
 
-    private void Start()
-    {
-        switch (Janle)
-        {
+    private void Start(){
+        switch (Janle){
             case ButtonJanle.RoteChange:
                 ButtonAction += RoteChange;
                 break;
@@ -44,31 +41,24 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
-    private void SetAttackColor()
-    {
+    private void SetAttackColor(){
         Player.SetAttackColor(SetColor);
     }//攻撃色変更メソッド
 
-    private void RoteChange()
-    {
+    private void RoteChange(){
         Player.RoteChange(SetColor);
     }//道移動メソッド
 
-    public void PlayerButtonAction()
-    {
-        if (GameManager.Flag)
-        {
+    public void PlayerButtonAction(){
+        if (GameManager.Flag){
             ButtonAction();
         }
     }
 
-    private void Awake()
-    {
+    private void Awake(){
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         ButtonColor = GetComponent<Image>();
     }
-
-
 
     private void Update(){
         if (Janle == ButtonJanle.SetAttackColor){

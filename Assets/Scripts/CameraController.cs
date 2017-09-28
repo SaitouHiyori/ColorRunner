@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour {
     //背景色
     private Paint.Name[] BackgroundColor = new Paint.Name[3];//一覧
     public static Paint.Name NowBackgroundColor;//現在の背景色
-    //public Paint.Name StartBackgroundColor;
+    public Paint.Name InterfaceBackgroundColor;
 
     public float[] FadeTime;//フェードアウト・インにかかる時間
     public int[] FadeCount;//フェード秒数毎の往復回数
@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour {
     private IEnumerator Flash(Paint.Name NowColor, Paint.Name NewColor){
         //点滅開始
         IsFlash = true;
-        NowBackgroundColor = Paint.Name.Non;
+        NowBackgroundColor = Paint.Name.Change;
 
         //点滅メソッド呼出
         yield return StartCoroutine(Flashing(NowColor, NewColor));
@@ -88,13 +88,20 @@ public class CameraController : MonoBehaviour {
         Camera = GetComponent<Camera>();
 
         //使用する背景色を取得
-        for (int i = 0; i <= BackgroundColor.Length; i++){
+        for (int i = 0; i < BackgroundColor.Length; i++){
             BackgroundColor[i] = Paint.Int2Name(i);
         }
 
+    }
+
+    private void Start(){
         //初期背景色設定
-        NowBackgroundColor = Paint.Int2Name(Random.Range(1, 4));
+        NowBackgroundColor = Paint.Int2Name(Random.Range(0, 3));
         Camera.backgroundColor = Paint.GetColor(NowBackgroundColor);
     }
- 
+
+    private void Update(){
+        InterfaceBackgroundColor = NowBackgroundColor;
+    }
+
 }

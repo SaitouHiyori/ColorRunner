@@ -3,30 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour {
-    public enum ItemJanle {Coin,Gasoline };
-    public ItemJanle Janle;
+    public enum ItemJanle {Coin,Gasoline };//アイテム種類
+    public ItemJanle Janle;//選択された種類
 
-    delegate void ItemAction();
-    ItemAction Action;
+    delegate void ItemAction();//選択式アイテム挙動
+    ItemAction Action;//選択された挙動
 
-    public int Score;
-    public float Gasoline;
+    public float Speed;//移動速度
 
-    public float Speed;
+    public int Score;//取得スコア
+    public AudioClip ItemSound;//取得音
+    public GameObject SEPlayerPre;//取得音再生オブジェクト
 
-    public AudioClip ItemSound;
+    public float TopLimmite;
+    public float UnderLimmite;
+
+    public Vector3 Roll;
+    public float AddDeg;//回転量
 
     public Player Player;
 
     //アイテムジャンル別処理
     private void ItemAction_Coin(){
         GameManager.Score = Score;
-        
+        Player.IsItemGet();
         Destroy(this.gameObject);
     }//コイン
 
     private void ItemAction_Gasoline(){
-        Player.AddGasoline(Gasoline);
+        Player.AddGasoline(Score);
+        Player.IsItemGet();
         Destroy(this.gameObject);
     }//ガソリン
 
@@ -52,16 +58,32 @@ public class Item : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
+        Vector3 NowPos = transform.position;
+
+        //下に落ちると上に行く
+        if (NowPos.y <= UnderLimmite){
+            NowPos.y = TopLimmite;
+            transform.position = NowPos;
+        }
+
+
         //移動
         Vector3 Move = new Vector3(-Speed, 0, 0);
         transform.position += Move;
+
+        //回転
+        
+        Roll.z += AddDeg * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(Roll);
+
     }
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
-            AudioSource PlayerAudiosource = other.gameObject.GetComponent<AudioSource>();
-            PlayerAudiosource.clip = ItemSound;
-            PlayerAudiosource.Play();
+            Player = other.gameObject.GetComponent<Player>();
+            GameObject SEPlayer = Instantiate(SEPlayerPre);//効果音生成
+            SEPlayer.GetComponent<AudioSource>().clip = ItemSound;//効果音設定
+            SEPlayer.GetComponent<ItemGetSound>().SEPlay();//効果音再生
             Action();
         }
     }

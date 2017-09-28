@@ -23,18 +23,32 @@ public class Player : MonoBehaviour {
         }
     }
 
+    //移動スコア
+    private int RunScore;//走った距離
+    public float RunScoreInterval;//スコア取得間隔
+
     //弾丸
     public GameObject BulletPre;//弾丸プレファブ
     private GameObject BulletObj;//弾丸インスタンス
     public Paint.Name AttackColor;//発射する弾の色
+    public Vector3 BulletShotPos;
 
     //移動位置
-    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8,6,0), new Vector3(-8,1,0), new Vector3(-8,-4,0) };
+    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8, 6.5f, 0), new Vector3(-8, 1.5f, 0), new Vector3(-8, -3.5f, 0) };
     private static Transform PlayerTransform;
 
     //Audio
     private AudioSource AudioSource;
     public AudioClip SoundEfect;
+    public float GetItemSETime;//SE再生時間
+    private static float SETimer;
+    private float BeforTimer;
+    private bool IsMute;
+
+    //ItemGetIcon
+    public GameObject ItemGetIcon;
+    public Vector3 ItemGetIconPos;
+    public Vector3 ItemGetIconRoll;
 
     //ボタンアクション
     public void RoteChange(Paint.Name RoteColor){
@@ -50,8 +64,9 @@ public class Player : MonoBehaviour {
     }
 
     public void Shot(){
-        BulletObj = (GameObject)Instantiate(BulletPre,transform.position,Quaternion.identity);//弾生成
+        BulletObj = (GameObject)Instantiate(BulletPre,transform.position + BulletShotPos,Quaternion.identity);//弾生成
         BulletObj.GetComponent<Bullet>().SetColor(AttackColor);//攻撃色設定
+        TankMain.IsShot = true;
     }//攻撃メソッド
 
     public static void AddGasoline(float HowMenyGasoline){
@@ -63,19 +78,36 @@ public class Player : MonoBehaviour {
         }
     }//ガソリン補充メソッド
 
+    private IEnumerator Running(){
+        while (true){
+            if (!GameManager.Flag){
+                GameManager.Score = RunScore;
+                break;
+            }
+            yield return new WaitForSeconds(RunScoreInterval);
+            RunScore++;//スコア加算
+        }
+    }
 
-	void Awake () {
+    public void IsItemGet(){
+        Instantiate(ItemGetIcon, transform.position + ItemGetIconPos, Quaternion.Euler(ItemGetIconRoll));
+    }
+
+    void Awake () {
         Gasoline = MaxGasoline;
         PlayerTransform = GameObject.FindWithTag("Player").transform;
         AudioSource = GetComponent<AudioSource>();
 
         //プレイヤーオブジェクトは初期位置へ移動
         PlayerTransform.position = MovePos[1];//初期位置：真ん中
-
     }
 	
+    private void Start(){
+        StartCoroutine(Running());//走り出す
+    }
+
 	public void Move () {
-            Vector3 NowPos = PlayerTransform.position;
+
 
             Gasoline -= UseGasoline * Time.deltaTime;//ガソリンを消費する
             //ガソリンがなくなると車は動かない
@@ -83,24 +115,30 @@ public class Player : MonoBehaviour {
             GameManager.Flag = false;
             }
 
-            //下に落ちると上に行く
-            if (NowPos.y <= UnderLimmite){
+        Vector3 NowPos = PlayerTransform.position;
+
+        //下に落ちると上に行く
+        if (NowPos.y <= UnderLimmite){
                 NowPos.y = TopLimmite;
                 PlayerTransform.position = NowPos;
             }
+
+        TankMain.IsFall = (GetComponent<Rigidbody>().velocity.y < 0) ? true : false;
 
     }
 
     void OnGUI(){
         string Score = "Score:" + GameManager.Score;
+        string RunAway = string.Format("RunAway:{0}m", RunScore);
         string GasolineMater = string.Format("Gasoline:{0:###}%", Gasoline / MaxGasoline * 100);
 
         GUIStyle Style = new GUIStyle();
-        Style.fontSize = 40;
+        Style.fontSize = 30;
 
         if (GameManager.Flag){
             GUI.Label(new Rect(0, 0, 100, 100), Score, Style);
-            GUI.Label(new Rect(0, 40, 100, 100), GasolineMater, Style);
+            GUI.Label(new Rect(0, 30, 100, 100), RunAway, Style);
+            GUI.Label(new Rect(0, 60, 100, 100), GasolineMater, Style);
         }
 
     }
