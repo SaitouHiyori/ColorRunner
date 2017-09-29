@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
     }
 
     //移動スコア
-    private int RunScore;//走った距離
+    public int RunScore;//走った距離
     public float RunScoreInterval;//スコア取得間隔
 
     //弾丸
@@ -36,16 +36,15 @@ public class Player : MonoBehaviour {
     public Vector3 BulletShotPos;
 
     //移動位置
-    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8, 7, 0), new Vector3(-8, 4, 0), new Vector3(-8, 0, 0) };
+    private Vector3[] MovePos = new Vector3[3] {
+        new Vector3(-8, 7.15f, 0),
+        new Vector3(-8, 4.15f, 0),
+        new Vector3(-8, 1f, 0)
+    };
     private static Transform PlayerTransform;
 
     //Audio
     private AudioSource ShotSound;
-    //public AudioClip ShotSound;
-    //public float GetItemSETime;//SE再生時間
-    //private static float SETimer;
-    //private float BeforTimer;
-    //private bool IsMute;
 
     //ItemGetIcon
     public GameObject ItemGetIcon;
@@ -82,13 +81,29 @@ public class Player : MonoBehaviour {
 
     }//攻撃メソッド
 
-    public static void AddGasoline(float HowMenyGasoline){
-        //ガソリン補充
-        GasolineTank += HowMenyGasoline;
-        //ガソリンは一定量までしか入らない
-        if (GasolineTank > MaxGasoline){
-            GasolineTank = MaxGasoline;
+    private IEnumerator GasolineCharge(float HowManyGasoline){
+        float ChargedGasoline = new float();
+
+        while(ChargedGasoline < HowManyGasoline){
+            ChargedGasoline += Time.deltaTime * 10;
+            GasolineTank += Time.deltaTime * 10;
+            if(GasolineTank > MaxGasoline){
+                GasolineTank = MaxGasoline;
+            }
+            Debug.Log(GasolineTank);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
+    }
+
+    public void AddGasoline(float HowMenyGasoline){
+        ////ガソリン補充
+        //GasolineTank += HowMenyGasoline;
+        ////ガソリンは一定量までしか入らない
+        //if (GasolineTank > MaxGasoline){
+        //    GasolineTank = MaxGasoline;
+        //}
+
+        StartCoroutine(GasolineCharge(HowMenyGasoline));
     }//ガソリン補充メソッド
 
     private IEnumerator Running(){
@@ -140,19 +155,4 @@ public class Player : MonoBehaviour {
 
     }
 
-    void OnGUI(){
-        string Score = "Score:" + GameManager.Score;
-        string RunAway = string.Format("RunAway:{0}m", RunScore);
-        string GasolineMater = string.Format("Gasoline:{0:###}%", Gasoline / MaxGasoline * 100);
-
-        GUIStyle Style = new GUIStyle();
-        Style.fontSize = 30;
-
-        if (GameManager.Flag){
-            GUI.Label(new Rect(0, 0, 100, 100), Score, Style);
-            GUI.Label(new Rect(0, 30, 100, 100), RunAway, Style);
-            GUI.Label(new Rect(0, 60, 100, 100), GasolineMater, Style);
-        }
-
-    }
 }

@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour {
     private void Start(){
         //初期背景色設定
         //NowBackgroundColor = Paint.Int2Name(Random.Range(0, 3));
-        NowBackgroundColor = Paint.Name.Withe;
+        NowBackgroundColor = Paint.Name.White;
         Camera.backgroundColor = Paint.GetColor(NowBackgroundColor);
         //ColorChanger();
     }

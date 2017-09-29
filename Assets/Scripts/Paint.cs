@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Paint :MonoBehaviour  {
     //色を管理するスクリプト
-    public enum Name { Red,Blue,Green,Withe,Non }//名称
+    public enum Name { Red,Green,Blue,White,Non }//名称
 
     private static Color[] UsePaint = new Color[] {
         new Color(0.8f, 0.2f, 0.2f),//赤
-        new Color(0.2f, 0.2f, 0.8f),//青
         new Color(0.2f, 0.8f, 0.2f),//緑
+        new Color(0.2f, 0.2f, 0.8f),//青
         new Color(1, 1, 1),
         new Color(0, 0, 0),
     };//色
