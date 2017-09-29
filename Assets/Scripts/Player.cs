@@ -28,22 +28,24 @@ public class Player : MonoBehaviour {
     public float RunScoreInterval;//スコア取得間隔
 
     //弾丸
+    public float ShotInterval;
+    public bool ShotFlag;
     public GameObject BulletPre;//弾丸プレファブ
     private GameObject BulletObj;//弾丸インスタンス
     public Paint.Name AttackColor;//発射する弾の色
     public Vector3 BulletShotPos;
 
     //移動位置
-    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8, 6.5f, 0), new Vector3(-8, 1.5f, 0), new Vector3(-8, -3.5f, 0) };
+    private Vector3[] MovePos = new Vector3[3] { new Vector3(-8, 7, 0), new Vector3(-8, 4, 0), new Vector3(-8, 0, 0) };
     private static Transform PlayerTransform;
 
     //Audio
-    private AudioSource AudioSource;
-    public AudioClip SoundEfect;
-    public float GetItemSETime;//SE再生時間
-    private static float SETimer;
-    private float BeforTimer;
-    private bool IsMute;
+    private AudioSource ShotSound;
+    //public AudioClip ShotSound;
+    //public float GetItemSETime;//SE再生時間
+    //private static float SETimer;
+    //private float BeforTimer;
+    //private bool IsMute;
 
     //ItemGetIcon
     public GameObject ItemGetIcon;
@@ -63,10 +65,21 @@ public class Player : MonoBehaviour {
         AttackColor = AttackColorName;//キャスト変換
     }
 
+    private IEnumerator ShotIntervalChacker(){
+        ShotFlag = false;
+        yield return new WaitForSeconds(ShotInterval);
+        ShotFlag = true;
+    }
+
     public void Shot(){
-        BulletObj = (GameObject)Instantiate(BulletPre,transform.position + BulletShotPos,Quaternion.identity);//弾生成
-        BulletObj.GetComponent<Bullet>().SetColor(AttackColor);//攻撃色設定
-        TankMain.IsShot = true;
+        if (ShotFlag){
+            BulletObj = (GameObject)Instantiate(BulletPre, transform.position + BulletShotPos, Quaternion.identity);//弾生成
+            BulletObj.GetComponent<Bullet>().SetColor(AttackColor);//攻撃色設定
+            TankMain.IsShot = true;
+            ShotSound.Play();
+            StartCoroutine(ShotIntervalChacker());
+        }
+
     }//攻撃メソッド
 
     public static void AddGasoline(float HowMenyGasoline){
@@ -96,7 +109,7 @@ public class Player : MonoBehaviour {
     void Awake () {
         Gasoline = MaxGasoline;
         PlayerTransform = GameObject.FindWithTag("Player").transform;
-        AudioSource = GetComponent<AudioSource>();
+        ShotSound = GetComponent<AudioSource>();
 
         //プレイヤーオブジェクトは初期位置へ移動
         PlayerTransform.position = MovePos[1];//初期位置：真ん中

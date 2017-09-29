@@ -206,7 +206,7 @@ MonoBehaviour:
   SEPlayerPre: {fileID: 1652530483100038, guid: c8fb2ee7f93dbf34d9cd9240087450dd,
     type: 2}
   TopLimmite: 9
-  UnderLimmite: -6.5
+  UnderLimmite: -2
   Roll: {x: 90, y: 0, z: 0}
   AddDeg: 180
   Player: {fileID: 0}

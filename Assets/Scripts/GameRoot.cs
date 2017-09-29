@@ -13,12 +13,14 @@ public class GameRoot : MonoBehaviour {
 
     private CameraController CameraController;
 
+    public bool GameEndFlag;
     private bool GameF;
 
     //各種オブジェクト
     private Player Player;
     public ItemFactory ItemFactory;
     public SceneRuler SceneRuler;
+    public GameObject GameOverCanvas;
 
     public static void RoteBehind(){
         //全ての道を判定
@@ -33,11 +35,15 @@ public class GameRoot : MonoBehaviour {
 
     private void GameOver(){
         //敗北演出
+        if (GameF){
+            Instantiate(GameOverCanvas, transform.position, Quaternion.identity);
+            GameF = false;
+        }
 
-
+        //FadeCanvasObj = Instantiate(FadeCanvasPre);//フェード用Canvas生成
+        //FadeCanvasObj.transform.GetComponentInChildren<FadeManager>().FadeStart(FadeManager.FadeFlag.FadeIn);
         if (Input.GetButtonDown("Fire1")){
             SceneRuler.SceneChange();
-            GameF = false;
         }
     }
 
@@ -60,7 +66,8 @@ public class GameRoot : MonoBehaviour {
     }
 	
     private void Start(){
-        RoteBehind();
+        CameraController.ColorChanger();
+        //RoteBehind();
     }
 
 	void Update () {
@@ -75,9 +82,7 @@ public class GameRoot : MonoBehaviour {
             ItemFactory.Move();
         }
         else{
-            if (GameF){
                 GameOver();
-            }
         }
 	}
 }
