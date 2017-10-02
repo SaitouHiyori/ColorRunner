@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
     ////本体色
     //private int BodyColorCount;//使用する本体色数
     public Paint.Name NowColor;//現在の本体色
@@ -25,7 +26,8 @@ public class Enemy : MonoBehaviour {
 
     //}//本体色変更メソッド
 
-    private void Awake () {
+    private void Awake()
+    {
         ////本体色数取得
         //BodyColorCount = System.Enum.GetNames(typeof(Paint.Name)).Length;
 
@@ -38,37 +40,59 @@ public class Enemy : MonoBehaviour {
         NowColor = Paint.Name.Non;
     }
 
-    private void Update () {
+    private void Update()
+    {
         //画面外退場で消滅
-        if(this.transform.position.x < LeftLimitte){
+        if (this.transform.position.x < LeftLimitte)
+        {
             Destroy(this.gameObject);
         }
 
         //背景と同化したら消滅
-        if (CameraController.NowBackgroundColor == NowColor){
+        if (CameraController.NowBackgroundColor == NowColor)
+        {
             Destroy(this.gameObject);
         }
 
         Vector3 NowPos = transform.position;
 
         //下に落ちると上に行く
-        if (NowPos.y <= UnderLimmite){
+        if (NowPos.y <= UnderLimmite)
+        {
             NowPos.y = TopLimmite;
             transform.position = NowPos;
         }
 
         ET.EnemyIsFallnow = (GetComponent<Rigidbody>().velocity.y < 0) ? true : false;
+        //Debug.Log(GetComponent<Rigidbody>().velocity.y);
 
         //移動
         Vector3 Move = new Vector3(-Speed, 0, 0);
         transform.position += Move;
-	}
 
-    private void OnTriggerEnter(Collider other){
-        if(other.gameObject.tag == "Player"){
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
             //Playerに触れたらゲーム終了
             Destroy(this.gameObject);
             GameManager.Flag = false;
         }
+
+        ///////////////////////////////////////////
+        //    if (other.gameObject.tag == "Road")
+        //    {
+        //        ET.EnemyIsFallnow = false;
+        //        Debug.Log("o");
+        //    }
+        //}
+
+        //public void OnTriggerExit(Collider other)
+        //{
+        //        ET.EnemyIsFallnow = true;
+        //        Debug.Log("k");
+        //}
     }
 }

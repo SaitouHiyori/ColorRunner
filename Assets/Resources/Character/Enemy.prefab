@@ -360,8 +360,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4962953962426188}
-  - component: {fileID: 95699835238288730}
-  - component: {fileID: 114093738683406882}
+  - component: {fileID: 95613954984155092}
+  - component: {fileID: 114224873754585786}
   m_Layer: 0
   m_Name: SD_Firefly
   m_TagString: Untagged
@@ -729,7 +729,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1073788425869842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.454174, y: 1.1547372, z: -6.6992188}
+  m_LocalPosition: {x: 0, y: 1.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4962953962426188}
@@ -865,7 +865,7 @@ Transform:
   - {fileID: 4452699527852008}
   m_Father: {fileID: 4742707170711938}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 90, z: 0}
 --- !u!4 &4968721414679096
 Transform:
   m_ObjectHideFlags: 1
@@ -1840,7 +1840,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6, y: 1.5, z: 2}
+  m_Size: {x: 2.6, y: 1.4, z: 2}
   m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!65 &65366907052949300
 BoxCollider:
@@ -1852,9 +1852,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6, y: 1.5, z: 2}
+  m_Size: {x: 2.6, y: 1.3, z: 2}
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!95 &95699835238288730
+--- !u!95 &95613954984155092
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -1863,7 +1863,7 @@ Animator:
   m_GameObject: {fileID: 1609301074649738}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fb55f759792651d4bbbce589bab7c0cf, type: 2}
+  m_Controller: {fileID: 9100000, guid: c8a6c2122a9771848a84cea5205755c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1871,7 +1871,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114093738683406882
+--- !u!114 &114224873754585786
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1882,7 +1882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71fe586b4b7ac947a4c27c36f062c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 95699835238288730}
+  Animator: {fileID: 95613954984155092}
   EnemyIsFallnow: 0
   PSCont: {fileID: 114406856100926420}
 --- !u!114 &114406856100926420
@@ -1971,7 +1971,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -35494270
+  randomSeed: 121302969
   InitialModule:
     serializedVersion: 3
     enabled: 1

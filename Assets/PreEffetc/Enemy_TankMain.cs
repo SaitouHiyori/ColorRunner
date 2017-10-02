@@ -24,16 +24,19 @@ public class Enemy_TankMain : MonoBehaviour {
             if (EnemyIsFallnow)//落下中
             {
                 PSCont.EnemySmoke = false;//煙中断
-                Animator.SetBool("Tank_Down", true);//落下アニメーション
+                Animator.SetBool("EnemyTank_Down", true);//落下アニメーション
             }
             else {
                 PSCont.EnemySmoke = true;
-                Animator.SetBool("Tank_Down", false);
+                Animator.SetBool("EnemyTank_Down", false);
             }
+
+            Debug.Log(EnemyIsFallnow);
+
         }
         else {
             PSCont.EnemySmoke = false;
-            Animator.SetBool("Tank_Down", false);
+            Animator.SetBool("EnemyTank_Down", false);
         }
     }
 }

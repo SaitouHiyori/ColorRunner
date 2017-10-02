@@ -9,6 +9,7 @@ TagManager:
   - Green
   - Enemy
   - Fader
+  - Road
   layers:
   - Default
   - TransparentFX
