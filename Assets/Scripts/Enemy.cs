@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour {
     public float TopLimmite;
     public float UnderLimmite;
 
+    //落下判定用
+    public bool EnemyIsFall;
+    private Enemy_TankMain ET;
+
     //public void ColorChanger(Paint.Name NewColor){
     //    //色変更
     //    NowColor = NewColor;
@@ -28,6 +32,8 @@ public class Enemy : MonoBehaviour {
         ////ランダムに色を決定
         //int FirstColor = Random.Range(0, BodyColorCount);
         //ColorChanger(Paint.Int2Name(FirstColor));
+
+        ET = GetComponentInChildren<Enemy_TankMain>();
 
         NowColor = Paint.Name.Non;
     }
@@ -51,6 +57,7 @@ public class Enemy : MonoBehaviour {
             transform.position = NowPos;
         }
 
+        ET.EnemyIsFallnow = (GetComponent<Rigidbody>().velocity.y < 0) ? true : false;
 
         //移動
         Vector3 Move = new Vector3(-Speed, 0, 0);
