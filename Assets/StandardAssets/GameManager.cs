@@ -12,7 +12,10 @@ public static class GameManager{
 
     public static int Score{
         set{
-            GameScore += value;
+            if (GameFlag)
+            {
+                GameScore += value;
+            }
         }
         get{
             return GameScore;
