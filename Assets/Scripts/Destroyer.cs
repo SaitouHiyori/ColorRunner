@@ -17,7 +17,7 @@ public class Destroyer : MonoBehaviour {
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Enemy"){
             //接触したEnemyを攻撃色に変更する
-            other.GetComponent<Enemy>().ColorChanger(Attack.AttackColorNum);
+            //other.GetComponent<Enemy>().ColorChanger(Attack.AttackColorNum);
         }
     }
 }
