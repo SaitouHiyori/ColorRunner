@@ -2159,7 +2159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561e0610501404045b265406625a218b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionPre: {fileID: 1507560008359172, guid: f2378db8d80688a40a70a2fdd45310cc,
+  ExplosionPre: {fileID: 1162432048045310, guid: 49fbe224ce1838742acc934c9533f4f6,
     type: 2}
   ExplosionPos: {x: 0, y: 0, z: 0}
   ExplosionRoll: {x: 0, y: 0, z: 0}
@@ -3478,7 +3478,10 @@ GameObject:
   - component: {fileID: 1697636633}
   - component: {fileID: 1697636634}
   - component: {fileID: 1697636632}
+<<<<<<< HEAD
   - component: {fileID: 1697636636}
+=======
+>>>>>>> 4d6f6f10593c6c6d3ca6f7bdd5c16768475a96f3
   - component: {fileID: 1697636635}
   m_Layer: 0
   m_Name: GameRoots
@@ -3566,6 +3569,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1697636631}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: 6c16eb9345f3b394ebbf02070f421758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -3649,6 +3653,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+=======
+  m_Script: {fileID: 11500000, guid: afb2c974158dc3245adb16629047bb1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorebord: {fileID: 0}
+>>>>>>> 4d6f6f10593c6c6d3ca6f7bdd5c16768475a96f3
 --- !u!1001 &1731915503
 Prefab:
   m_ObjectHideFlags: 0
