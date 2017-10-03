@@ -592,7 +592,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4623766780485138, guid: 7addd1c35da6e3a449d132601a25cde5, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4623766780485138, guid: 7addd1c35da6e3a449d132601a25cde5, type: 2}
       propertyPath: m_LocalScale.z
@@ -1767,6 +1767,7 @@ GameObject:
   - component: {fileID: 993597299}
   - component: {fileID: 993597300}
   - component: {fileID: 993597301}
+  - component: {fileID: 993597294}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1774,6 +1775,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &993597294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 993597293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561e0610501404045b265406625a218b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplosionPre: {fileID: 1507560008359172, guid: f2378db8d80688a40a70a2fdd45310cc,
+    type: 2}
+  ExplosionPos: {x: 0, y: 0, z: 0}
+  ExplosionRoll: {x: 0, y: 0, z: 0}
 --- !u!65 &993597295
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1799,7 +1815,7 @@ Transform:
   - {fileID: 1526599311}
   - {fileID: 847865823}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &993597298
 MonoBehaviour:
@@ -2641,7 +2657,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1526599311 stripped
 Transform:
@@ -3667,7 +3683,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4295865822130688, guid: c004b1a1081410d46b3a896e0d7fe2ca, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4295865822130688, guid: c004b1a1081410d46b3a896e0d7fe2ca, type: 2}
       propertyPath: m_LocalScale.z

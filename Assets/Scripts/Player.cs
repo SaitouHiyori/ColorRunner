@@ -90,7 +90,7 @@ public class Player : MonoBehaviour {
             if(GasolineTank > MaxGasoline){
                 GasolineTank = MaxGasoline;
             }
-            Debug.Log(GasolineTank);
+            //Debug.Log(GasolineTank);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
