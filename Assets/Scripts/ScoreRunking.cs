@@ -11,6 +11,7 @@ public class ScoreRunking : MonoBehaviour {
     private int[] _SaveI= {0,0,0,0,0 };
 
     void Start(){
+        WriteScore();
         for (int i = 0; i < 5; i++){
             _SaveI[i] = PlayerPrefs.GetInt(_ScoreRankKey[i], 0); }
         _Score = new List<int>(_SaveI);
