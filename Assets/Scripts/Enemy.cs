@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
             transform.position = NowPos;
         }
 
-        ET.EnemyIsFallnow = (GetComponent<Rigidbody>().velocity.y < 0) ? true : false;
+        //ET.EnemyIsFallnow = (GetComponent<Rigidbody>().velocity.y < 0) ? true : false;
         //Debug.Log(GetComponent<Rigidbody>().velocity.y);
 
         //移動
@@ -77,24 +77,23 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Playerに触れたらゲーム終了
-            Destroy(this.gameObject);
-            ScoreRunking sr = FindObjectOfType<ScoreRunking>();
-            sr.ScoreAdd();
+            Destroy(other.gameObject);//Playerを消す
+
+            Destroy(this.gameObject);//自分を消す
             GameManager.Flag = false;
         }
 
         ///////////////////////////////////////////
-        //    if (other.gameObject.tag == "Road")
-        //    {
-        //        ET.EnemyIsFallnow = false;
-        //        Debug.Log("o");
-        //    }
-        //}
+        if (other.gameObject.tag == "Road")
+        {
+            ET.EnemyIsFallnow = false;
+            Debug.Log("o");
+        }
+    }
 
-        //public void OnTriggerExit(Collider other)
-        //{
-        //        ET.EnemyIsFallnow = true;
-        //        Debug.Log("k");
-        //}
+    public void OnTriggerExit(Collider other)
+    {
+        ET.EnemyIsFallnow = true;
+        Debug.Log("k");
     }
 }
