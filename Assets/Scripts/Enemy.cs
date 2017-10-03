@@ -61,8 +61,13 @@ public class Enemy : MonoBehaviour {
         if(other.gameObject.tag == "Player"){
             //Playerに触れたらゲーム終了
             Destroy(this.gameObject);
+<<<<<<< HEAD
             ScoreRunking sr = GameObject.FindObjectOfType<ScoreRunking>();
             sr.ScoreAdd();
+=======
+            ScoreRunking _scrRunking = GameObject.FindObjectOfType<ScoreRunking>();
+            _scrRunking.ScoreAdd();
+>>>>>>> a5e63fc74ffec8952ffe50ea02a495cc773687ba
             GameManager.Flag = false;
         }
     }
