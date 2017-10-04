@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561e0610501404045b265406625a218b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionPre: {fileID: 1507560008359172, guid: f2378db8d80688a40a70a2fdd45310cc,
+  ExplosionPre: {fileID: 1162432048045310, guid: 49fbe224ce1838742acc934c9533f4f6,
     type: 2}
   ExplosionPos: {x: 0, y: 0, z: 0}
   ExplosionRoll: {x: 0, y: 0, z: 0}
