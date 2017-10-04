@@ -85,8 +85,8 @@ public class Player : MonoBehaviour {
         float ChargedGasoline = new float();
 
         while(ChargedGasoline < HowManyGasoline){
-            ChargedGasoline += Time.deltaTime * 10;
-            GasolineTank += Time.deltaTime * 10;
+            ChargedGasoline += Time.deltaTime * 60;
+            GasolineTank += Time.deltaTime * 40;
             if(GasolineTank > MaxGasoline){
                 GasolineTank = MaxGasoline;
             }
