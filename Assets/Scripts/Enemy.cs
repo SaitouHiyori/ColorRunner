@@ -79,7 +79,9 @@ public class Enemy : MonoBehaviour
             //Playerに触れたらゲーム終了
             Destroy(other.gameObject);//Playerを消す
             ScoreRunking sr = FindObjectOfType<ScoreRunking>();
+            explode ex = FindObjectOfType<explode>();
             sr.ScoreAdd();
+            ex._SoundPlay();
             Destroy(this.gameObject);//自分を消す
             GameManager.Flag = false;
         }
