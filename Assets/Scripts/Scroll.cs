@@ -18,7 +18,8 @@ public class Scroll : MonoBehaviour {
         transform.position += MovePos;
 
         //スクロール終了地点を過ぎたら開始地点に戻す
-        if (transform.position.x < ScrollEnd){
+        if (transform.position.x < ScrollEnd)
+        {
             float yPos = Random.Range(LowEnd, HeighEnd);
             Vector3 ReturnPos = new Vector3(ScrollStart, yPos, 1);
             transform.position = ReturnPos;
